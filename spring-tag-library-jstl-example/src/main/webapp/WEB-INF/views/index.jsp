@@ -21,9 +21,11 @@
 				<td><form:password path="password" /></td>
 				<td><form:errors path="password" ></form:errors></td>
 			</tr>
+			<tr>
+				<td colspan="3"><form:textarea path="result" readonly="true"></form:textarea></td>
+			</tr>
 		</table>
 		<br>
-		<form:textarea path="result" readonly="true" ></form:textarea>
 		<br>
 		<input type="submit" value="Submit" /><br/>
 	</form:form>
