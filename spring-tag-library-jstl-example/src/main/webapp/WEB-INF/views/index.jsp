@@ -14,7 +14,7 @@
 			<tr>
 				<td>Username</td>
 				<td><form:input path="username" /></td>
-				<td><form:errors path="username" ></form:errors></td>
+				<td><form:errors path="username" cssStyle="color:red" ></form:errors></td>
 			</tr>
 			<tr>
 				<td>Password</td>
