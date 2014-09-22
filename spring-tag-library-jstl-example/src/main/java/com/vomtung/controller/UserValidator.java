@@ -1,5 +1,6 @@
 package com.vomtung.controller;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.springframework.validation.*;
@@ -15,14 +16,29 @@ public class UserValidator implements Validator {
 	public void validate(Object obj, Errors error) {
 
 		User user = (User) obj;
-		if (error.hasFieldErrors("age"))
+		if (error.hasFieldErrors("age")){
 			error.rejectValue("age", "age.valid");
+		}
 		/*if (acc.getAge() > 120 || acc.getAge() < 1)
 			error.rejectValue("age", "age.invalid");
 		if (!EmailValidate(acc.getEmail()))
 			error.rejectValue("email", "email.invalid");*/
-		if (user.getUsername().length() < 4){
-			error.rejectValue("username", "username.too_short");
+		/*if(error.hasFieldErrors("username")){
+			error.rejectValue("username", "username.invalid");
+		}
+		if(error.hasFieldErrors("password")){
+			error.rejectValue("password", "password.invalid");
+		}*/
+		if (user.getUsername().equals("")){
+			error.rejectValue("username", "NotNull.user.username");
+		}
+		
+		if (user.getPassword().equals("")){
+			error.rejectValue("password", "NotNull.user.password");
+		}
+		
+		if (user.getUsername().contains(user.getPassword())&&!user.getUsername().equals("")){
+			error.rejectValue("password", "password.contain_user_name");
 		}
 	}
 

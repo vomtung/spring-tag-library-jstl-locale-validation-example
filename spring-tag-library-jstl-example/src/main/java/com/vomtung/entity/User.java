@@ -1,27 +1,40 @@
 package com.vomtung.entity;
 
+import java.util.List;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class User {
 	
-	private boolean solved;
+	private List<String> favouriteSkill;
 	
 	String result;
 	
 	String label;
 	
+	List<String>skills;
+	
+	@NotNull
+	@Size(min=5,max=10)
 	String username;
 	
+	@NotNull
+	@Size(min=5,max=10)
 	String password;
-
-	public boolean getSolved() {
-		return solved;
-	}
 	
-	public boolean isSolved() {
-		return solved;
+	String sex;
+
+	public List<String> getFavouriteSkill() {
+		return favouriteSkill;
 	}
 
-	public void setSolved(boolean solved) {
-		this.solved = solved;
+	public void setFavouriteSkill(List<String> favouriteSkill) {
+		this.favouriteSkill = favouriteSkill;
 	}
 
 	public String getResult() {
@@ -40,6 +53,14 @@ public class User {
 		this.label = label;
 	}
 
+	public List<String> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<String> skills) {
+		this.skills = skills;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -55,6 +76,13 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 	
 }
