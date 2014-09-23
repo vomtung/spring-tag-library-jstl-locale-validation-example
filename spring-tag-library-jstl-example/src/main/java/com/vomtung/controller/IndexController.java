@@ -10,7 +10,6 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,23 +23,7 @@ public class IndexController {
 	@RequestMapping(method=RequestMethod.GET)
 	String index(ModelMap model){
 		
-		List<String>countryList=new ArrayList<String>();
-		countryList.add("vietnam");
-		countryList.add("us");
-		countryList.add("us");
-		
-		Map<String,String>sexList=new HashMap<String,String>();
-		sexList.put("male","Male");
-		sexList.put("female","Female");
-		
-		Map<String,String>skillList=new HashMap<String,String>();
-		skillList.put("java","Java");
-		skillList.put("c","C");
-		skillList.put("php","PHP");
-		skillList.put("javascript","JavaScript");
-		skillList.put("ruby","Ruby");
-		model.put("skillList",skillList);
-		
+		initData(model);
 		User user=new User();
 		user.setLabel("label example");
 		List<String>skills=new ArrayList<String>();
@@ -62,26 +45,53 @@ public class IndexController {
 			ModelMap model){
 		UserValidator userValidator = new UserValidator();
 		userValidator.validate(user, bindingResult);
+		initData(model);
+		model.addAttribute("user", user);
 		if (bindingResult.hasErrors()) {
-			Map<String,String>skillList=new HashMap<String,String>();
-			skillList.put("java","Java");
-			skillList.put("c","C");
-			skillList.put("php","PHP");
-			skillList.put("javascript","JavaScript");
-			skillList.put("ruby","Ruby");
-			model.put("skillList",skillList);
 			return "index";
 		} else {
-			Map<String,String>skillList=new HashMap<String,String>();
-			skillList.put("java","Java");
-			skillList.put("c","C");
-			skillList.put("php","PHP");
-			skillList.put("javascript","JavaScript");
-			skillList.put("ruby","Ruby");
-			model.put("skillList",skillList);
-			model.addAttribute("user", user);
-			user.setResult("skills:"+user.getSkills().toString()+";username:"+user.getUsername());
+			user.setResult("skills:"+user.getSkills().toString()+";username:"+user.getUsername()+
+					";Relation status:"+user.getRelationshipStatus()+
+					";Color eyes:"+user.getColorEyes()
+					);
 			return "index";
 		}
 	};
+	
+	void initData(ModelMap model){
+		Map<String,String>countryList=new HashMap<String, String>();
+		countryList.put("us", "United State");
+		countryList.put("ge", "German");
+		countryList.put("vn", "VietNam");
+		countryList.put("jp", "Japan");
+		model.addAttribute("countryList", countryList);
+		
+		Map<String,String>skillList=new HashMap<String,String>();
+		skillList.put("java","Java");
+		skillList.put("c","C");
+		skillList.put("php","PHP");
+		skillList.put("javascript","JavaScript");
+		skillList.put("ruby","Ruby");
+		model.addAttribute("skillList",skillList);
+		
+		Map<String,String>sexList=new HashMap<String, String>();
+		sexList.put("M", "Male");
+		sexList.put("F", "Female");
+		model.addAttribute("sexList", sexList);
+		
+		Map<String,String>relationshipStatusList=new HashMap<String, String>();
+		relationshipStatusList.put("S", "Single");
+		relationshipStatusList.put("M", "Married");
+		relationshipStatusList.put("D", "Divorce");
+		relationshipStatusList.put("U", "Unkown");
+		model.addAttribute("relationshipStatusList", relationshipStatusList);
+		
+		Map<String,String>colorEyesList=new HashMap<String, String>();
+		colorEyesList.put("B","Blue");
+		colorEyesList.put("G","Green");
+		colorEyesList.put("Br","Brown");
+		colorEyesList.put("Bl","Black");
+		model.addAttribute("colorEyesList", colorEyesList);
+		
+	}
 }

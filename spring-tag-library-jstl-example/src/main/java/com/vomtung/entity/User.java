@@ -19,6 +19,8 @@ public class User {
 	
 	List<String>skills;
 	
+	String country;
+	
 	@NotNull
 	@Size(min=5,max=10)
 	String username;
@@ -28,6 +30,18 @@ public class User {
 	String password;
 	
 	String sex;
+	
+	String relationshipStatus;
+	
+	List<String> colorEyes;
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 	public List<String> getFavouriteSkill() {
 		return favouriteSkill;
@@ -84,5 +98,23 @@ public class User {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
+
+	public String getRelationshipStatus() {
+		return relationshipStatus;
+	}
+
+	public void setRelationshipStatus(String relationshipStatus) {
+		this.relationshipStatus = relationshipStatus;
+	}
+
+	public List<String> getColorEyes() {
+		return colorEyes;
+	}
+
+	public void setColorEyes(List<String> colorEyes) {
+		this.colorEyes = colorEyes;
+	}
+
+	
 	
 }
